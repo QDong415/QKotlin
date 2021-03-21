@@ -1,7 +1,6 @@
 package com.dq.qkotlin.ui.notifications
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +13,8 @@ import com.dq.qkotlin.R
 import com.dq.qkotlin.net.LoadState
 import com.dq.qkotlin.databinding.ActivityListviewBinding
 import com.dq.qkotlin.ui.base.BaseFragment
-import com.dq.qkotlin.ui.notifications.detail.UserListActivity
+import com.dq.qkotlin.ui.home.detail.UserListActivity
 import com.yang.databindingdemo.listView.adapter.ListViewAdapter
-import org.w3c.dom.Text
 
 /**
  * 如果界面是基于listview，那么参考这里的代码；因为listview用的确实越来越少了，本文暂时没有对listview界面做更深的封装，

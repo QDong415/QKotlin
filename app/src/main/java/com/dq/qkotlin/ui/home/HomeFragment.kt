@@ -12,9 +12,8 @@ import com.dq.qkotlin.R
 import com.dq.qkotlin.databinding.ActivityListviewBinding
 import com.dq.qkotlin.net.LoadState
 import com.dq.qkotlin.ui.base.BaseFragment
-import com.dq.qkotlin.ui.notifications.detail.UserListActivity
+import com.dq.qkotlin.ui.home.detail.UserListActivity
 import com.yang.databindingdemo.listView.adapter.ListViewAdapter
-import com.zackratos.ultimatebarx.library.UltimateBarX
 
 class HomeFragment : BaseFragment() {
 

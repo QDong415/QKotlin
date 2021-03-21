@@ -1,7 +1,6 @@
-package com.dq.qkotlin.ui.notifications.detail
+package com.dq.qkotlin.ui.home.detail
 
 import android.os.Bundle
-import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dq.qkotlin.R
@@ -10,7 +9,6 @@ import com.dq.qkotlin.databinding.ActivityRecycleviewBinding
 import com.dq.qkotlin.net.BasePageEntity
 import com.dq.qkotlin.net.RetrofitInstance
 import com.dq.qkotlin.net.UserApiService
-import com.dq.qkotlin.tool.QApplication
 import com.dq.qkotlin.ui.base.BaseRVActivity
 import com.dq.qkotlin.ui.base.BaseRVPagerViewModel
 import com.scwang.smart.refresh.layout.SmartRefreshLayout

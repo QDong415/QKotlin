@@ -23,7 +23,7 @@
             android:name=".ui.home.DetailActivity"></activity>
 
         <activity
-            android:name=".ui.notifications.detail.UserListActivity"></activity>
+            android:name="com.dq.qkotlin.ui.home.detail.UserListActivity"></activity>
 
 
     </application>

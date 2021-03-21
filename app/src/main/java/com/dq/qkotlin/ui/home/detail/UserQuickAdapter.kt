@@ -1,6 +1,5 @@
-package com.dq.qkotlin.ui.notifications.detail
+package com.dq.qkotlin.ui.home.detail
 
-import android.util.Log
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.dq.qkotlin.R
