@@ -74,9 +74,14 @@ class UserListActivity : BaseRVActivity<UserBaseBean, UserListActivity.UserArray
     //本界面对应的VM类，如果VM复杂的话，也可以独立成一个外部文件
     class UserArrayViewModel: BaseRVPagerViewModel<UserBaseBean>() {
 
+        //按MVVM设计原则，请求网络应该放到更下一层的"仓库类"里，但是我感觉如果你只做网络不做本地取数据，没必要
+        //请求用户列表接口
         fun requireUserList(params : HashMap<String,String> , loadmore : Boolean){
 
+            //调用"万能列表接口封装"
             super.requireList(params, loadmore){
+
+                //用kotlin高阶函数，传入本Activity的"请求用户列表接口的代码块" 就是这3行代码
                 var apiService : UserApiService = RetrofitInstance.instance.create(UserApiService::class.java)
                 val response: BasePageEntity<UserBaseBean> = apiService.userList(params)
                 response
