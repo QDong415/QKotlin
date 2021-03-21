@@ -1,5 +1,6 @@
 package com.dq.qkotlin.net
 
+//具体的网络接口返回情况
 enum class LoadState {
     None,
     Loading, //下拉刷新开始请求接口 or 普通开始请求接口
