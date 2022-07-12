@@ -1,24 +1,22 @@
 package com.dq.qkotlin.ui.base
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dq.qkotlin.net.LoadState
-import com.dq.qkotlin.net.BasePageEntity
+import com.dq.qkotlin.net.ResponsePageEntity
+import com.dq.qkotlin.tool.NET_ERROR
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import kotlin.collections.HashMap
 
 /**
- * 场景：如果你的列表界面用的是RecycleView，那么Acitivty或Fragment里的 MyViewModel 继承这个VM，（T是列表的实体类）
+ * 场景：如果你的列表界面用的是RecyclerView，那么Activity或Fragment里的 MyViewModel 继承这个VM，（T是列表的实体类）
  *
  * 特点：不监听list，只监听网络访问状态loadStatus，然后根据不同的loadStatus来直接用list；轻便简单容易理解
- * 为什么还有tempList：因为recycleview有notifyItemRangeInserted,所以翻页的时候要用到这一页的templist，然后用templist做局部刷新
+ * 为什么还有tempList这东西？：因为recyclerview有notifyItemRangeInserted,所以翻页的时候要用到这一页的templist，然后用templist做局部刷新
  */
 open class BaseRVPagerViewModel<T>: BaseViewModel() {
 
-    //下拉刷新的错误信息，服务器给我返回的 也可以自定义
+    //下拉刷新的错误信息是服务器给我返回的，如果网络请求失败，我就本地自定义
     var errorMessage:String? = null
 
     //最核心的数据列表，我的做法是：不监听他，直接get他
@@ -43,8 +41,7 @@ open class BaseRVPagerViewModel<T>: BaseViewModel() {
      * @loadmore true = 是底部翻页，false = 下拉刷新
      * @block 具体的那两行suspend协程请求网络的代码块，其返回值是网络接口返回值
      */
-    open fun requireList(params : HashMap<String,String>, loadmore : Boolean , block:suspend() -> BasePageEntity<T>){
-
+    open fun requestList(params : HashMap<String,String>, loadmore : Boolean , block:suspend() -> ResponsePageEntity<T>){
 
         _loadStatus.value = (if (loadmore) LoadState.PageLoading else LoadState.Loading)
 
@@ -54,7 +51,7 @@ open class BaseRVPagerViewModel<T>: BaseViewModel() {
         //访问网络异常的回调用, 这种方法可以省去try catch, 但不适用于async启动的协程
         val coroutineExceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
             //这里是主线程；
-            errorMessage = "Emm..服务器出小差了";
+            errorMessage = NET_ERROR
             _loadStatus.setValue(
                     if (loadmore) LoadState.PageNetworkFail else LoadState.NetworkFail
             )
@@ -64,7 +61,7 @@ open class BaseRVPagerViewModel<T>: BaseViewModel() {
         viewModelScope.launch(coroutineExceptionHandler) {
 
             //具体的那两行suspend协程请求网络的代码 由VM子类来实现
-            val response: BasePageEntity<T> = block();
+            val response: ResponsePageEntity<T> = block();
             //如果网络访问异常，代码会直接进入CoroutineExceptionHandler，不会走这里了
 
             if (loadmore) {

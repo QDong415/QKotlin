@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/toolbar_height"
     android:background="@color/toolbar_color"
-    android:elevation="4dp"
     android:minHeight="@dimen/toolbar_height"
-    android:theme="@style/ToolbarTheme"
+    android:text="标题"
+    android:elevation="4dp"
     app:navigationIcon="@drawable/ic_white_black_24dp"
     app:layout_collapseMode="pin"
-    app:titleTextColor="@color/text_black_color"
+    app:titleTextAppearance="@style/ToolTitleStyle"
     app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light">
 
 </androidx.appcompat.widget.Toolbar>

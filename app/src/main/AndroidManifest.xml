@@ -2,17 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dq.qkotlin">
 
+
     <application
         android:name="com.dq.qkotlin.tool.QApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.QKotlin">
+        android:theme="@style/AppTheme">
+
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:name="com.dq.qkotlin.ui.common.WelcomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -20,11 +22,22 @@
         </activity>
 
         <activity
-            android:name=".ui.home.DetailActivity"></activity>
+            android:name="com.dq.qkotlin.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
+        </activity>
 
         <activity
-            android:name="com.dq.qkotlin.ui.home.detail.UserListActivity"></activity>
+            android:name=".ui.home.DetailActivity"
+            android:screenOrientation="portrait" ></activity>
 
+        <activity
+            android:name=".ui.mvc.FriendActivity"
+            android:screenOrientation="portrait" ></activity>
+
+        <activity
+            android:name="com.dq.qkotlin.ui.home.detail.UserRVActivity"
+            android:screenOrientation="portrait" ></activity>
 
     </application>
 

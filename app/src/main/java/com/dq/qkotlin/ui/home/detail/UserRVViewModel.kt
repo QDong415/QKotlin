@@ -1,23 +1,26 @@
-package com.dq.qkotlin.ui.home
+package com.dq.qkotlin.ui.home.detail
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.dq.qkotlin.bean.UserBaseBean
 import com.dq.qkotlin.net.*
 import com.dq.qkotlin.tool.NET_ERROR
-import com.dq.qkotlin.ui.base.BaseLVPagerViewModel
+import com.dq.qkotlin.tool.checkResponseCodeAndThrow
+import com.dq.qkotlin.tool.requestCommon
+import com.dq.qkotlin.ui.base.BaseRVPagerViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 
-class HomeViewModel: BaseLVPagerViewModel<UserBaseBean>() {
+class UserRVViewModel: BaseRVPagerViewModel<UserBaseBean>() {
 
-    //请求列表，params：接口参数（不包括page字段）。loadmore：true表示底部加载更多，false表示下拉刷新
+    //按MVVM设计原则，请求网络应该放到更下一层的"仓库类"里，但是我感觉如果你只做网络不做本地取数据，没必要
+    //请求用户列表接口
     fun requestUserList(params : HashMap<String,String> , loadmore : Boolean){
 
-        //调用《万能》列表请求的封装
+        //调用"万能列表接口封装"
         super.requestList(params, loadmore){
 
-            //这里只需要写"本Activity的Retrofit请求列表接口"的代码闭包，返回值是
+            //用kotlin高阶函数，传入本Activity的"请求用户列表接口的代码块" 就是这3行代码
             var apiService : UserApiService = RetrofitInstance.instance.create(UserApiService::class.java)
             val response: ResponsePageEntity<UserBaseBean> = apiService.userList(params)
             response
@@ -61,6 +64,7 @@ class HomeViewModel: BaseLVPagerViewModel<UserBaseBean>() {
             followRequestStateMap = MutableLiveData<Pair<Int ,Int>>()
         }
 
+        //请求服务器之前，我就发出广播
         val loadingMap = Pair(to_userid, idealValue)
         followRequestStateMap!!.value = loadingMap
 
@@ -113,6 +117,8 @@ class HomeViewModel: BaseLVPagerViewModel<UserBaseBean>() {
         val coroutineExceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
             //访问网络异常的回调用, 这种方法可以省去try catch, 但不适用于async启动的协程
             //这里是主线程；
+
+            //如果404，代码会进入这里
             responseCallback?.onResponse(null, NET_ERROR)
         }
 
@@ -167,7 +173,7 @@ class HomeViewModel: BaseLVPagerViewModel<UserBaseBean>() {
                 //进入这里，说明是服务器崩溃，errorMessage是我们本地自定义的
                 deleteRequestErrorMessage = NET_ERROR
                 //给Activity回调网络请求失败
-                val errorPair =  Pair(to_userid, LoadState.NetworkFail)
+                val errorPair = Pair(to_userid, LoadState.NetworkFail)
                 deleteRequestStatePair!!.value = errorPair
 
                 return@launch
@@ -189,5 +195,25 @@ class HomeViewModel: BaseLVPagerViewModel<UserBaseBean>() {
     }
 
 
+    //用BaseViewModel里的requireCommon的Demo展示
+    fun requestListByMVC(params : HashMap<String,String>, successCallback: NetworkSuccessCallback<PageData<UserBaseBean>>, failCallback: NetworkFailCallback){
+
+        requestCommon(viewModelScope, {
+            var apiService : UserApiService = RetrofitInstance.instance.create(UserApiService::class.java)
+            //suspend 是这一步
+            val response: ResponsePageEntity<UserBaseBean> = apiService.userList(params)
+            //如果网络访问异常，代码会直接进入CoroutineExceptionHandler，不会走这里了
+            //这里是主线程
+
+            //检查服务器返回的数据的code是否是success。如果是失败，代码会走到failCallback
+            checkResponseCodeAndThrow(response)
+
+            //给Activity回调成功
+            successCallback?.onResponseSuccess(response.data)
+            }
+
+            ,failCallback
+        )
+    }
 
 }

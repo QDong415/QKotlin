@@ -8,7 +8,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 object ViewBindingAdapter {
-    const val QINIU_URL = "https://qiniu.itopic.com.cn/"
 
     @JvmStatic //kotlin 必须加这句Static，java可以不加
     @BindingAdapter(value = ["key", "holder"], requireAll = false)

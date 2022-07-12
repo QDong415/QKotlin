@@ -2,6 +2,7 @@ package com.dq.qkotlin.net
 
 import android.util.Log
 import com.dq.qkotlin.BuildConfig
+import com.dq.qkotlin.tool.BASE_URL
 import com.ihsanbal.logging.LoggingInterceptor
 import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
@@ -19,6 +20,8 @@ class RetrofitInstance {
 
         val builder = OkHttpClient.Builder().connectTimeout(DEFAULT_TIMEOUT.toLong(),TimeUnit.SECONDS)
             .writeTimeout(DEFAULT_TIMEOUT.toLong(),TimeUnit.SECONDS)
+            .readTimeout(5, TimeUnit.SECONDS)
+            .callTimeout(5, TimeUnit.SECONDS)
             .connectionPool(ConnectionPool(8, 15, TimeUnit.SECONDS))
 
         if (BuildConfig.DEBUG) {
@@ -33,6 +36,8 @@ class RetrofitInstance {
             )
         }
 
+        Log.e("dz","RetrofitInstance constructor");
+
         okHttpClient = builder.build()
 
         retrofit = Retrofit.Builder()
@@ -45,9 +50,7 @@ class RetrofitInstance {
 
     companion object {
 
-        private val DEFAULT_TIMEOUT:Int = 16
-        //服务端根路径
-        private val BASE_URL:String = "https://api.itopic.com.cn/api/"
+        private val DEFAULT_TIMEOUT:Int = 5
 
         private var okHttpClient: OkHttpClient? = null
         private var retrofit: Retrofit? = null

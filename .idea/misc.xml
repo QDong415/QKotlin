@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/red_circle_disable.xml" value="0.113" />
+        <entry key="app/src/main/res/drawable/splash.xml" value="0.113" />
+        <entry key="app/src/main/res/layout/activity_listview.xml" value="0.13722826086956522" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.13722826086956522" />
+        <entry key="app/src/main/res/layout/activity_recyclerview.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_recycleview.xml" value="0.13722826086956522" />
+        <entry key="app/src/main/res/layout/common_toolbar.xml" value="0.13722826086956522" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/listitem_follower.xml" value="0.13722826086956522" />
+        <entry key="app/src/main/res/layout/toolbar_draw.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.14583333333333334" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

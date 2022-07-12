@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ViewStub
+        android:id="@+id/view_stub_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <Button
+        android:id="@+id/detail_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white_black_selector"
+        android:focusable="false"
+        android:text="MVVM 监听Model"
+        android:backgroundTint="@color/red_color"
+        android:layout_marginRight="12dp"
+        android:textSize="16sp" />
+
+<!--    <Button-->
+<!--        android:id="@+id/total_button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="@color/white_black_selector"-->
+<!--        android:focusable="false"-->
+<!--        android:text="MVVM 监听整个json"-->
+<!--        android:layout_marginRight="12dp"-->
+<!--        android:textSize="16sp" />-->
+
+
+    <TextView
+        android:id="@+id/home_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+</LinearLayout>

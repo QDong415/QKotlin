@@ -53,14 +53,14 @@ enum class LoadState {
 ```
 下面看一下代码：
 
-基于RecycleView的界面对应的 BaseRVPagerViewModel：
+基于RecyclerView的界面对应的 BaseRVPagerViewModel：
 ```kotlin
 
 /**
- * 场景：如果你的列表界面用的是RecycleView，那么Acitivty或Fragment里的 MyViewModel 继承这个VM，（T是列表的实体类）
+ * 场景：如果你的列表界面用的是RecyclerView，那么Activity或Fragment里的 MyViewModel 继承这个VM，（T是列表的实体类）
  *
  * 特点：不监听list，只监听网络访问状态loadStatus，然后根据不同的loadStatus来直接用list；轻便简单容易理解
- * 为什么还有tempList：因为recycleview有notifyItemRangeInserted,所以翻页的时候要用到这一页的templist，然后用templist做局部刷新
+ * 为什么还有tempList：因为recyclerview有notifyItemRangeInserted,所以翻页的时候要用到这一页的templist，然后用templist做局部刷新
  */
 open class BaseRVPagerViewModel<T>: ViewModel() {
 
@@ -95,7 +95,7 @@ open class BaseRVPagerViewModel<T>: ViewModel() {
      * @loadmore true = 是底部翻页，false = 下拉刷新
      * @block 具体的那两行suspend协程请求网络的代码块，其返回值是网络接口返回值
      */
-    open fun requireList(params : HashMap<String,String>, loadmore : Boolean , block:suspend() -> BasePageEntity<T>){
+    open fun requestList(params : HashMap<String,String>, loadmore : Boolean , block:suspend() -> BasePageEntity<T>){
 
 
         _loadStatus.value = (if (loadmore) LoadState.PageLoading else LoadState.Loading)
@@ -168,7 +168,7 @@ open class BaseRVPagerViewModel<T>: ViewModel() {
 ```kotlin
 
 /**
- * 场景：如果Activity里有RecycleView，那么就继承BaseRVActivity，T是列表数据的每条的Bean，VM 是BaseRVPagerViewModel子类
+ * 场景：如果Activity里有RecyclerView，那么就继承BaseRVActivity，T是列表数据的每条的Bean，VM 是BaseRVPagerViewModel子类
  */
 open abstract class BaseRVActivity<T ,VM : BaseRVPagerViewModel<T>> : BaseAppCompatActivity() {
 
@@ -242,16 +242,16 @@ open abstract class BaseRVActivity<T ,VM : BaseRVPagerViewModel<T>> : BaseAppCom
     }
 }
 ```
-以上是BaseRVActivity，下面就是具体的Activity的实现方式，我想了很久，到底Adapter实体类 和 ViewModel实体类 和 RefreshLayout实体类 到底是放到BaseRVActivity类里合适，还是放到具体的子类Acitivty里，最后决定是:
+以上是BaseRVActivity，下面就是具体的Activity的实现方式，我想了很久，到底Adapter实体类 和 ViewModel实体类 和 RefreshLayout实体类 到底是放到BaseRVActivity类里合适，还是放到具体的子类Activity里，最后决定是:
 ViewModel实体类 放在Base里，因为毕竟是要封装框架，ViewModel是框架级的东西，Base里经常会用到他；
-而RefreshLayout 和 Adapter 放到具体的子类Acitivty，因为他们往往会因为界面的个性化，做出具体的调整
+而RefreshLayout 和 Adapter 放到具体的子类Activity，因为他们往往会因为界面的个性化，做出具体的调整
 
 以下是具体的子类 UserListActivity 实现方式
 
 ```kotlin
 
 /**
- * RecycleView的Demo，具体每一条的bean是UserBaseBean，VM是UserArrayViewModel
+ * RecyclerView的Demo，具体每一条的bean是UserBaseBean，VM是UserArrayViewModel
  */
 class UserListActivity : BaseRVActivity<UserBaseBean, UserListActivity.UserArrayViewModel>() {
 
@@ -270,19 +270,19 @@ class UserListActivity : BaseRVActivity<UserBaseBean, UserListActivity.UserArray
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_recycleview)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_recyclerview)
         initView();
 
         binding.refreshLayout.setOnRefreshListener {
             val params = HashMap<String, String>()
             params["keyword"] = "小"
-            viewModel.requireUserList(params, false)
+            viewModel.requestUserList(params, false)
         }
 
         binding.refreshLayout.setOnLoadMoreListener {
             val params = HashMap<String, String>()
             params["keyword"] = "小"
-            viewModel.requireUserList(params, true)
+            viewModel.requestUserList(params, true)
         }
 
 
@@ -303,7 +303,7 @@ class UserListActivity : BaseRVActivity<UserBaseBean, UserListActivity.UserArray
     }
 
     override fun getTootBarTitle(): String {
-        return "RecycleView列表"
+        return "RecyclerView列表"
     }
 
     //本界面对应的VM类，如果VM复杂的话，也可以独立成一个外部文件
@@ -311,10 +311,10 @@ class UserListActivity : BaseRVActivity<UserBaseBean, UserListActivity.UserArray
 
         //按MVVM设计原则，请求网络应该放到更下一层的"仓库类"里，但是我感觉如果你只做网络不做本地取数据，没必要
         //请求用户列表接口
-        fun requireUserList(params : HashMap<String,String> , loadmore : Boolean){
+        fun requestUserList(params : HashMap<String,String> , loadmore : Boolean){
 
             //调用"万能列表接口封装"
-            super.requireList(params, loadmore){
+            super.requestList(params, loadmore){
 
                 //用kotlin高阶函数，传入本Activity的"请求用户列表接口的代码块" 就是这3行代码
                 var apiService : UserApiService = RetrofitInstance.instance.create(UserApiService::class.java)

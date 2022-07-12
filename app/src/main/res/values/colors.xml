@@ -14,4 +14,10 @@
     <color name="toolbar_color">#F6F6F6</color>
     <color name="sky_color">#2EA7EE</color>
 
+    <color name="divider_color">#E3E3E3</color>
+    <color name="background_color">#F3F3F3</color>
+
+    <color name="red_color">#FE6766</color>
+    <color name="red_press_color">#E64C64</color>
+    <color name="gray_color">#EEEEEE</color>
 </resources>

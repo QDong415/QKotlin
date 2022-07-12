@@ -1,6 +1,12 @@
 package com.dq.qkotlin.net
 
-class BasePageData<T> {
+class ResponsePageEntity<T> : BaseResponseEntity(){
+
+    //显示数据（用户需要关心的数据）
+    var data: PageData<T>? = null
+}
+
+class PageData<T> {
     var total = 0
     var totalpage = 0
     var currentpage = 0

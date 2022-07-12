@@ -3,7 +3,7 @@ package com.dq.qkotlin.bean
 import java.io.Serializable
 
 class UserBaseBean : Serializable {
-    var userid: String? = null
+    var userid: Int = 0
     var name: String? = null
     var avatar: String? = null
     var gender = 0

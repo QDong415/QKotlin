@@ -17,12 +17,7 @@ package com.dq.qkotlin.net
  *  ]
  * }
  */
-class BaseResultEntity<T> {
-    //  判断标示
-    var code = 0
-
-    //    提示信息
-    var message: String? = null
+class ResponseEntity<T> : BaseResponseEntity() {
 
     //显示数据（用户需要关心的数据）
     var data: T? = null

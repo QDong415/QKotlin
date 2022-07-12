@@ -12,7 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/white_background"
+        android:background="@drawable/white_selector"
         android:orientation="horizontal"
         android:paddingBottom="10dp"
         android:gravity="center_vertical"
@@ -31,6 +31,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="12dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="vertical" >
@@ -44,6 +45,27 @@
                 android:textSize="16sp" />
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white_black_selector"
+            android:focusable="false"
+            android:text="删除"
+            android:backgroundTint="@color/red_color"
+            android:layout_marginRight="12dp"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/follow_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white_black_selector"
+            android:focusable="false"
+            android:text="关注"
+            android:layout_marginRight="12dp"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
