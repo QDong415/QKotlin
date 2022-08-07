@@ -17,7 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.dq.qkotlin.R
 import com.dq.qkotlin.bean.UserBaseBean
 import com.dq.qkotlin.databinding.ActivityListviewBinding
-import com.dq.qkotlin.net.ResponseEntity
+import com.dq.qkotlin.bean.ResponseEntity
 import com.dq.qkotlin.net.LoadState
 import com.dq.qkotlin.net.NetworkResponseCallback
 import com.dq.qkotlin.tool.QApplication
@@ -62,7 +62,7 @@ class HomeFragment : Fragment(), INavBar {
 
         homeViewModel.loadStatus
                 .observe(viewLifecycleOwner, Observer<LoadState> { loadState: LoadState ->
-                    Log.e("dz","HomeFragment 收到通知"+loadState)
+                    Log.e("dq","HomeFragment 收到通知"+loadState)
                     when (loadState) {
                         LoadState.None -> {
                         }
@@ -239,7 +239,7 @@ class HomeFragment : Fragment(), INavBar {
                 val to_userid: Int = loadStateMap.first
                 val idealState: Int = loadStateMap.second // 0 ：最新的状态是"未关注" ；1：最新的状态是"已关注"
 
-                Log.e("dz","HomeFragment 关注收到通知"+idealState)
+                Log.e("dq","HomeFragment 关注收到通知"+idealState)
 
                 for (itemBean in homeViewModel.list!!) {
                     if (itemBean.userid == to_userid){

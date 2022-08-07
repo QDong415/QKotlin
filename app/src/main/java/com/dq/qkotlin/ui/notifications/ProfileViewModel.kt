@@ -3,6 +3,7 @@ package com.dq.qkotlin.ui.notifications
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dq.qkotlin.bean.ResponseEntity
 import com.dq.qkotlin.bean.UserBaseBean
 import com.dq.qkotlin.net.*
 import com.dq.qkotlin.tool.requestCommon

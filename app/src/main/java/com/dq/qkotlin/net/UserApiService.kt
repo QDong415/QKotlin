@@ -1,5 +1,7 @@
 package com.dq.qkotlin.net
 
+import com.dq.qkotlin.bean.ResponseEntity
+import com.dq.qkotlin.bean.ResponsePageEntity
 import com.dq.qkotlin.bean.UserBaseBean
 import retrofit2.http.*
 

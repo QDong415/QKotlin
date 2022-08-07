@@ -1,4 +1,4 @@
-package com.dq.qkotlin.net
+package com.dq.qkotlin.bean
 
 open class BaseResponseEntity {
 

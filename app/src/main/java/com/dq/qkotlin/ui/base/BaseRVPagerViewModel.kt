@@ -2,7 +2,7 @@ package com.dq.qkotlin.ui.base
 
 import androidx.lifecycle.viewModelScope
 import com.dq.qkotlin.net.LoadState
-import com.dq.qkotlin.net.ResponsePageEntity
+import com.dq.qkotlin.bean.ResponsePageEntity
 import com.dq.qkotlin.tool.NET_ERROR
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch

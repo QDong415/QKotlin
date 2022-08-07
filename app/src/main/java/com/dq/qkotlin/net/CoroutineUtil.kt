@@ -1,8 +1,8 @@
 package com.dq.qkotlin.tool
 
-import com.dq.qkotlin.net.BaseResponseEntity
+import com.dq.qkotlin.bean.BaseResponseEntity
 import com.dq.qkotlin.net.NetworkFailCallback
-import com.dq.qkotlin.net.ResponseException
+import com.dq.qkotlin.bean.ResponseException
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

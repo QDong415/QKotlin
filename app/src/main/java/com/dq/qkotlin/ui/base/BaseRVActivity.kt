@@ -36,7 +36,7 @@ open abstract class BaseRVActivity<T ,VM : BaseRVPagerViewModel<T>> : AppCompatA
         viewModel.loadStatus
                 .observe(this, Observer<LoadState> { loadState: LoadState ->
 
-                    Log.e("dz","BaseRVActivity 收到通知"+loadState)
+                    Log.e("dq","BaseRVActivity 收到通知"+loadState)
 
                     when (loadState) {
                         LoadState.None -> {

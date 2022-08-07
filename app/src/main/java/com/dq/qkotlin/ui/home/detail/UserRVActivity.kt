@@ -12,6 +12,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.dq.qkotlin.R
+import com.dq.qkotlin.bean.PageData
+import com.dq.qkotlin.bean.ResponseEntity
 import com.dq.qkotlin.bean.UserBaseBean
 import com.dq.qkotlin.databinding.ActivityRecyclerviewBinding
 import com.dq.qkotlin.net.*
@@ -139,13 +141,13 @@ class UserRVActivity : BaseRVActivity<UserBaseBean, UserRVViewModel>() , INavBar
                 viewModel.requestListByMVC(params, object : NetworkSuccessCallback<PageData<UserBaseBean>>{
 
                     override fun onResponseSuccess(responseEntry: PageData<UserBaseBean>?) {
-                        Log.e("dz","成功 onResponse = "+ responseEntry!!.items!!.size)
+                        Log.e("dq","成功 onResponse = "+ responseEntry!!.items!!.size)
                     }
 
                 }, object : NetworkFailCallback {
 
                     override fun onResponseFail(code: Int, errorMessage: String?) {
-                        Log.e("dz","失败 onResponse = "+ errorMessage)
+                        Log.e("dq","失败 onResponse = "+ errorMessage)
                     }
                 })
             }
@@ -200,7 +202,7 @@ class UserRVActivity : BaseRVActivity<UserBaseBean, UserRVViewModel>() , INavBar
                 val to_userid: Int = loadStateMap.first
                 val idealState: Int = loadStateMap.second // 0 ：最新的状态是"未关注" ；1：最新的状态是"已关注"
 
-                Log.e("dz","HomeFragment 关注收到通知"+idealState)
+                Log.e("dq","HomeFragment 关注收到通知"+idealState)
 
                 for ((index, itemBean) in viewModel.list!!.withIndex()) {
                     if (itemBean.userid == to_userid){

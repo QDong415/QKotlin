@@ -1,4 +1,4 @@
-package com.dq.qkotlin.net
+package com.dq.qkotlin.bean
 
 class ResponsePageEntity<T> : BaseResponseEntity(){
 

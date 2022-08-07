@@ -2,6 +2,8 @@ package com.dq.qkotlin.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.dq.qkotlin.bean.ResponseEntity
+import com.dq.qkotlin.bean.ResponsePageEntity
 import com.dq.qkotlin.bean.UserBaseBean
 import com.dq.qkotlin.net.*
 import com.dq.qkotlin.tool.NET_ERROR

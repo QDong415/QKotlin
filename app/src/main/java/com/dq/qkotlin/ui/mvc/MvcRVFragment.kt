@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dq.qkotlin.R
 import com.dq.qkotlin.bean.UserBaseBean
-import com.dq.qkotlin.net.ResponsePageEntity
+import com.dq.qkotlin.bean.ResponsePageEntity
 import com.dq.qkotlin.net.NetworkResponseCallback
 import com.dq.qkotlin.net.RetrofitInstance
 import com.dq.qkotlin.net.UserApiService
@@ -54,8 +54,6 @@ class MvcRVFragment : Fragment(), INavBar {
     //... -> FM.onCreateView -> FM.onActivityCreated -> FM.onStart -> AC.onStart -> AC.onResume -> FM.onResume
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        Log.e("dz","DashboardFragment onActivityCreated")
 
         initView()
         initListener()
@@ -137,7 +135,7 @@ class MvcRVFragment : Fragment(), INavBar {
         val coroutineExceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
             //访问网络异常的回调用, 这种方法可以省去try catch, 但不适用于async启动的协程
             //这里是主线程；
-            Log.e("dz",throwable.toString())
+            Log.e("dq",throwable.toString())
             responseCallback?.onResponse(null, NET_ERROR)
         }
 

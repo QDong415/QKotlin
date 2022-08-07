@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dq.qkotlin.R
+import com.dq.qkotlin.bean.ResponsePageEntity
 import com.dq.qkotlin.bean.UserBaseBean
 import com.dq.qkotlin.databinding.ActivityRecyclerviewBinding
 import com.dq.qkotlin.net.*
@@ -118,7 +119,7 @@ class FriendActivity : AppCompatActivity(), INavBar {
         val coroutineExceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
             //访问网络异常的回调用, 这种方法可以省去try catch, 但不适用于async启动的协程
             //这里是主线程；
-            Log.e("dz",throwable.toString())
+            Log.e("dq",throwable.toString())
             responseCallback?.onResponse(null, NET_ERROR)
         }
 

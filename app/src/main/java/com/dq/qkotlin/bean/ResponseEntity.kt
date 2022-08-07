@@ -1,4 +1,4 @@
-package com.dq.qkotlin.net
+package com.dq.qkotlin.bean
 
 /**
  * 回调信息统一封装类

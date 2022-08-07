@@ -36,8 +36,6 @@ class RetrofitInstance {
             )
         }
 
-        Log.e("dz","RetrofitInstance constructor");
-
         okHttpClient = builder.build()
 
         retrofit = Retrofit.Builder()
